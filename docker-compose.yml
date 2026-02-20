@@ -84,7 +84,7 @@ services:
     depends_on:
       - kafka
     ports:
-      - "8080:8080"
+      - "8085:8080"
 
   kafka:
     image: apache/kafka:latest
