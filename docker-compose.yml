@@ -1,6 +1,6 @@
 services:
   patient-service-db:
-    image: postgres:latest
+    image: postgres:16
     container_name: patient-service-db
     environment:
       POSTGRES_DB: postgres
@@ -17,7 +17,7 @@ services:
       - patient-db-data:/var/lib/postgresql/data
 
   auth-service-db:
-    image: postgres:latest
+    image: postgres:16
     container_name: auth-service-db
     environment:
       POSTGRES_DB: db
@@ -58,6 +58,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://auth-service-db:5432/db
       SPRING_DATASOURCE_USERNAME: admin_user
       SPRING_DATASOURCE_PASSWORD: password
+      JWT_SECRET: c3VwZXJzZWNyZXRrZXlzdXBlcnNlY3JldGtleXN1cGVyc2VjcmV0a2V5
 
   api-gateway:
     build: ./api-gateway
@@ -67,6 +68,8 @@ services:
       - patient-service
     ports:
       - "4004:4004"
+    environment:
+      AUTH_SERVICE_URL: http://auth-service:4005
 
   billing-service:
     build: ./billing-service
