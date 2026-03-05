@@ -1,3 +1,4 @@
+
 -- Ensure the 'patient' table exists
 CREATE TABLE IF NOT EXISTS patient
 (
